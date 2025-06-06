@@ -1,4 +1,4 @@
-# Ansible_JOKAR
+# Ansible
 # Automate deployment by creating two roles for (Magenta webserver & Mysql)
 simple ansible test. It is critical that the web server can communicate with the database.
 
