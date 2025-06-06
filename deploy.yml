@@ -1,0 +1,10 @@
+---
+- name: Deploy Magento and MySQL
+  hosts: all
+  become: true
+
+  roles:
+    - role: mysql_deploy
+      when: "'db_servers' in group_names"
+    - role: magento_deploy
+      when: "'web_servers' in group_names"

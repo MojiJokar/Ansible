@@ -1,0 +1,9 @@
+---
+# Web server specific
+magento_version: 2.4.5
+magento_admin_user: admin
+magento_admin_password: "secure_admin_password"
+magento_db_host: "{{ groups['db_servers'][0] }}"
+magento_db_name: magento
+magento_db_user: magento
+magento_db_password: "secure_db_password"

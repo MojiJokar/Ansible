@@ -1,0 +1,30 @@
+---
+- name: Install MySQL
+  apt:
+    name: mysql-server
+    state: present
+
+- name: Ensure MySQL is running
+  service:
+    name: mysql
+    state: started
+    enabled: true
+
+- name: Secure MySQL installation
+  command: mysql_secure_installation -u root -p"{{ mysql_root_password }}"
+  when: false # Disabled for demo, or use a proper module/script for automation
+
+- name: Create Magento database
+  mysql_db:
+    name: "{{ magento_db_name }}"
+    state: present
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+
+- name: Create Magento database user
+  mysql_user:
+    name: "{{ magento_db_user }}"
+    password: "{{ magento_db_password }}"
+    priv: "{{ magento_db_name }}.*:ALL"
+    login_user: root
+    login_password: "{{ mysql_root_password }}"

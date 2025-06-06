@@ -1,0 +1,35 @@
+---
+- name: Install Apache
+  apt:
+    name: apache2
+    state: present
+
+- name: Install PHP and required modules
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - php
+    - php-mysql
+    - php-curl
+    - php-gd
+    - php-intl
+    - php-mbstring
+    - php-xml
+    - php-zip
+
+- name: Copy Magento installation script
+  copy:
+    src: files/magento_install.sh
+    dest: /tmp/magento_install.sh
+    mode: 0755
+
+- name: Run Magento installation script
+  command: /tmp/magento_install.sh
+  environment:
+    MAGENTO_DB_HOST: "{{ magento_db_host }}"
+    MAGENTO_DB_NAME: "{{ magento_db_name }}"  # Note: Should be magento_db_name, see below
+    MAGENTO_DB_USER: "{{ magento_db_user }}"
+    MAGENTO_DB_PASSWORD: "{{ magento_db_password }}"
+    MAGENTO_ADMIN_USER: "{{ magento_admin_user }}"
+    MAGENTO_ADMIN_PASSWORD: "{{ magento_admin_password }}"

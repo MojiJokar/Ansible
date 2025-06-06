@@ -1,0 +1,11 @@
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: web
+    image: ubuntu:latest
+provisioner:
+  name: ansible
+verifier:
+  name: testinfra

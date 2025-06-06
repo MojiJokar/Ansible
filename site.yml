@@ -1,0 +1,12 @@
+---
+- name: Deploy MySQL Database
+  hosts: db
+  become: true  # Changed from 'yes' to boolean
+  roles:
+    - mysql
+
+- name: Deploy Magento Web Server
+  hosts: web
+  become: true  # Changed from 'yes' to boolean
+  roles:
+    - magento
