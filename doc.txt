@@ -1,0 +1,110 @@
+
+on aws  region
+make 5 sg
+
+make 4 instances in aws to then be able to conecct to those instances in your inventory 
+you must mention your ips of remote aws:
+find the public ip of instances and put here to ssh to remote:
+master ,   3 target machine
+
+make key-pair ansible-master
+Networking  setting, advanced-detail: user-data, paste your script
+TO MAKE A PRIVTE KEY :
+in making instance AMI  we make a  key-pair ,named ansible-master.pem , saved it then copied it in 
+a new file called: key.pem : key.pem = ansible-master.pem
+
+
+
+
+
+--------------------------------------
+Install Ansible on Ubuntu using apt
+
+sudo apt-get install software-properties-common
+sudo apt-add-repository --yes --update ppa:ansible/ansible
+sudo apt-get install ansible
+
+ansible --version
+
+
+sudo nano ~/.ansible/key.pem
+
+
+moji@DESKTOP-B56ER7Q:~$ ssh datascientest@52.47.*****.8888 -i ansible-master.pem
+datascientest@ip-172-3*****-4*-237:~$ 
+
+Install the necessary packages on a master 
+sudo apt-get update
+sudo apt install python3-pip
+pip install boto3
+sudo apt install python3-boto3
+nano instance_state.py
+
+Copy the entirety of the ansible-key.pem
+Then create a file key.pem 
+sudo nano ~/.ansible/key.pem
+
+
+TO MAKE  YOUIR PROJECT :
+---------------------------
+1. Prepare Your Environment
+sudo apt update
+sudo apt install ansible -y
+pip install molecule molecule-docker testinfra
+
+2. Set Up Project Structure
+Create the project directory and files as described in the previous answer (inventory, group_vars, roles, playbook).
+
+
+3. Write and Organize Your Playbook
+Edit your playbook (deploy.yml) and roles.
+
+Edit your inventory (hostos.ini).
+
+Add your variables in group_vars/.
+
+
+to run it you must install number1. above first !!!
+4. Run the Playbook Step by Step
+ansible-playbook -i hostos.ini deploy.yml
+moji@DESKTOP-B56ER7Q:/mnt/c/Users/mmb20/OneDrive/Desktop/Ansible$ ansible-playbook -i hostos.ini deploy.yml
+
+
+
+Run Molecule Tests for MySQL:
+
+bash
+cd roles/mysql
+MYSQL_ROOT_PASSWORD=secure_root_password molecule test > ../../test_results.txt
+
+
+Run Molecule Tests for MySQL:
+
+bash
+cd roles/mysql
+MYSQL_ROOT_PASSWORD=secure_root_password molecule test > ../../test_results.txt
+
+
+
+
+
+
+5. Run Molecule Tests for Each Role
+Navigate to each role directory:
+
+bash
+cd roles/magento_deploy
+molecule test
+cd ../mysql_deploy
+molecule test
+
+
+
+Collect test results:
+
+bash
+molecule test > ../../test_results.txt
+# For the second role, append:
+molecule test >> ../../test_results.txt
+
+
